@@ -1,0 +1,21 @@
+version: '3.5'
+services:
+  client:
+    image: node:20.11.1-bullseye
+    env_file:
+        - "config/config.env"
+    volumes:
+      - "./app:/app"
+    ports:
+        - 8080:8080
+    working_dir: /app
+    command: ["npm", "run", "start"]
+
+  watch:
+    image: node:20.11.1-bullseye
+    volumes:
+      - "./app:/app"
+    ports:
+      - "3010:3010"
+    working_dir: "/app"
+    entrypoint: "npm run watch"
